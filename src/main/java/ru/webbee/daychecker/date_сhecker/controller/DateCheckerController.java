@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @RestController
 public class DateCheckerController {
     @GetMapping
-    @RequestMapping(path = "/isWorkingDay")
+    @RequestMapping(path = "/isHoliday")
     public boolean checkIsHoliday(
             @RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDate date) {
         var days = CalendarParser.getCalendarData();
@@ -25,8 +25,8 @@ public class DateCheckerController {
     }
 
     @GetMapping
-    @RequestMapping(path = "/isWorkingTime")
-    public boolean checkIsWorkingTime(
+    @RequestMapping(path = "/isNonWorkingTime")
+    public boolean checkIsNonWorkingTime(
             @RequestParam("datetime") @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime dateTime) {
         LocalDate date = dateTime.toLocalDate();
         if (checkIsHoliday(date)) {
